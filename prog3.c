@@ -22,3 +22,23 @@ void reverseTraverse(Node* head) {
     printf("%d ", head->data);    
 }
 
+int main() {
+    //create list
+    Node* head = createNode(1);
+    head->next = createNode(2);
+    head->next->next = createNode(3);
+    head->next->next->next = createNode(4);
+    
+    printf("Original list (forward): 1 2 3 4\n");
+    printf("Reverse traversal: ");
+    reverseTraverse(head);  
+    printf("\n");
+    //memory cleanup
+    while (head) {
+        Node* temp = head;
+        head = head->next;
+        free(temp);
+    }
+    
+    return 0;
+}
