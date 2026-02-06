@@ -64,33 +64,34 @@ bool isbalanced(const char *e) { // e for expression
     }
     
     return top == -1; //is true if stack is empty
-}
+} //main function
 int main() {
-    //test expressions
-    const char *test_expressions[] = {
-        "()",
-        "({[]})",
-        "([)]",
-        "{[}]",
-        "((()))",
-        "[{()}]",
-        "(",
-        ")",
-        "",
-        "{([])}"
+    
+    const char *expressions[] = {
+        "a + (b - c) * (d",   //unbalanced       
+        "m + [a - b * (c + d * {m)]",//unbalanced
+        "a + (b - c)"         //balanced       
     };
     
-    int num_tests = sizeof(test_expressions) / sizeof(test_expressions[0]);
+    printf("=== BALANCED PARENTHESES CHECKER ===\n\n");
     
-    printf("Bracket Balancing Checker\n");
-    printf("==========================\n\n");
-    
-    for (int i = 0; i < num_tests; i++) {
-        bool result = isblanced(test_expressions[i]);
-        printf("Expression: \"%s\" => %s\n", 
-               test_expressions[i], 
-               result ? "BALANCED" : "NOT BALANCED");
+    for (int i = 0; i < 3; i++) {
+        printf("Expression %d: %s\n", i + 1, expressions[i]);
+        
+        if (isbalanced(expressions[i])) {
+            printf("Result: ✓ BALANCED\n\n");
+        } else {
+            printf("Result: ✗ UNBALANCED\n\n");
+        }
     }
+    
+    printf("=== working (Example: \"a + (b - c)\") ===\n");
+    printf("Step 1: 'a','+',' '  ignored\n");
+    printf("Step 2: '('  pushed to stack [ ( ]\n");
+    printf("Step 3: 'b','-',' '  ignored\n");
+    printf("Step 4: '('  pushed to stack [ ( ( ]\n");
+    printf("Step 5: 'c',')'  pop matches '('  stack [ ( ]\n");
+    printf("Step 6: ')'  pop matches '('  stack empty ✓\n");
     
     return 0;
 }
