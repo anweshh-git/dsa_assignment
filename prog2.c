@@ -50,4 +50,40 @@ void infixToPostfix(char *infix, char *postfix) {
     while (!isEmptyOp()) postfix[j++] = popOp();   //pop remaining operators
     postfix[j] = '\0';
 }
+int evaluate(char *postfix) {
+    for (int i = 0; postfix[i]; i++) {
+        char c = postfix[i];
+        if (isdigit(c)) pushVal(c - '0');
+        else {
+            int b = popVal(), a = popVal();
+            switch(c) {
+                case '+': pushVal(a + b); break;
+                case '-': pushVal(a - b); break;
+                case '*': pushVal(a * b); break;
+                case '/': pushVal(a / b); break;
+            }
+        }
+    }
+    return popVal();
+}
+
+int main() {
+    char infix[MAX], postfix[MAX];
+    
+    //test case 1
+    strcpy(infix, "3+4*2/(1-5)");
+    infixToPostfix(infix, postfix);
+    printf("Infix:  %s\n", infix);
+    printf("Postfix: %s\n", postfix);
+    printf("Result:  %d\n\n", evaluate(postfix));
+    
+    //test case 2
+    strcpy(infix, "(5+3)*2");
+    infixToPostfix(infix, postfix);
+    printf("Infix:  %s\n", infix);
+    printf("Postfix: %s\n", postfix);
+    printf("Result:  %d\n", evaluate(postfix));
+    
+    return 0;
+}
 
