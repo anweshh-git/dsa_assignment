@@ -39,7 +39,7 @@ char peek(stack *s) {
     return s->items[s->top];
 }
 //checking if expression has balanced number of brackets
-bool isblanced(const char *e) { // e for expression
+bool isbalanced(const char *e) { // e for expression
     char stack[100];
     int top = -1;
     
@@ -64,4 +64,33 @@ bool isblanced(const char *e) { // e for expression
     }
     
     return top == -1; //is true if stack is empty
+}
+int main() {
+    //test expressions
+    const char *test_expressions[] = {
+        "()",
+        "({[]})",
+        "([)]",
+        "{[}]",
+        "((()))",
+        "[{()}]",
+        "(",
+        ")",
+        "",
+        "{([])}"
+    };
+    
+    int num_tests = sizeof(test_expressions) / sizeof(test_expressions[0]);
+    
+    printf("Bracket Balancing Checker\n");
+    printf("==========================\n\n");
+    
+    for (int i = 0; i < num_tests; i++) {
+        bool result = isblanced(test_expressions[i]);
+        printf("Expression: \"%s\" => %s\n", 
+               test_expressions[i], 
+               result ? "BALANCED" : "NOT BALANCED");
+    }
+    
+    return 0;
 }
