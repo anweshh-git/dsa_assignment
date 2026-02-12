@@ -21,7 +21,7 @@ void maxheap( int n,int arr[], int i){
         largest = right;
     }
 
-    if(largest != i){ //if any of the children are greater then swap with the parent
+    if(largest != i){     //if any child > parent then swap
         swap(&arr[i], &arr[largest]);
         maxHeap(arr, n, largest);
     }
@@ -59,4 +59,32 @@ void buildminheap( int arr[], int n){
         minHeap(arr, n, i);
     }
 }
+//main function
+int main() {
+    int arr[] = {12,4,6,1,8,10,18};
+    int n = sizeof(arr) / sizeof(arr[0]);
 
+    printf("before building heap:");
+
+    for (int i = 0; i < n; i++){
+        printf("%d ", arr[i]);
+    }
+
+//building max heap
+    buildmaxheap(arr, n);
+    printf("max heap: ");
+
+    for (int i = 0; i < n; i++){
+        printf("%d ", arr[i]);
+    }
+//building min heap
+    int arr2[] = {12,4,6,1,8,10,18};
+    buildminheap(arr2, n);
+    printf("min Heap: ");
+
+    for (int i = 0; i < n; i++){
+        printf("%d ", arr2[i]);
+    }
+
+    return 0;
+}
