@@ -51,23 +51,31 @@ void bfs(graph* g, int startvertex) {
     }
     printf("\n");
 }
-//helper function for dfs
-void dfsHelper(graph* g, int vertex, bool visited[]) {
-    visited[vertex] = true;
-    printf("%d ", vertex);
-    
-    for (int neighbor = 0; neighbor < g->numvertices; neighbor++) {
-        if (g->connections[vertex][neighbor] && !visited[neighbor]) {
-            dfsHelper(g, neighbor, visited);
-        }
-    }
-}
 //main dfs function
 void dfs(graph* g, int startvertex) {
-    bool visited[max_vertices] = {false};  
-    
+    bool visited[MAX_VERTICES] = {false};
+
     printf("dfs starting from vertex %d: ", startvertex);
-    dfsHelper(g, startvertex, visited);
+
+    int stack[MAX_VERTICES];
+    int top = -1;
+
+    stack[++top] = startvertex;
+
+    while (top >= 0) {
+        int vertex = stack[top--];
+
+        if (visited[vertex]) continue;
+        visited[vertex] = true;
+        printf("%d ", vertex);
+
+        for (int neighbor = g->numvertices - 1; neighbor >= 0; neighbor--) {
+            if (g->connections[vertex][neighbor] && !visited[neighbor]) {
+                stack[++top] = neighbor;
+            }
+        }
+    }
+
     printf("\n");
 }
 //function to print the adjacency matrix of the graph
