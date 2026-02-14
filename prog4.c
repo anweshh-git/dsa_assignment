@@ -57,5 +57,25 @@ void printList(Node* head) {
         head = head->next;
     }
     printf("\n");
+}// main function added please consider this consequence
+int main() {
+    Node* head = createNode(1);
+    head->next = createNode(2);
+    head->next->prev = head;
+    head->next->next = createNode(3);
+    head->next->next->prev = head->next;
+
+    printf("Original list: ");
+    printList(head);
+
+    insertAfter(head->next, 10);
+    printf("After inserting 10 after node 2: ");
+    printList(head);
+
+    deleteNode(&head, head->next->next);
+    printf("After deleting node 10: ");
+    printList(head);
+
+    return 0;
 }
 
