@@ -60,7 +60,6 @@ void insertion_sort(int arr[], int n) {
             j--;
         }
         arr[j + 1] = key;
-        swaps++;
     }
 }
 void merge(int arr[], int left, int mid, int right) {
