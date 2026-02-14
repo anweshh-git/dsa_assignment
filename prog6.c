@@ -8,7 +8,7 @@ void swap(int *a, int *b){
 }
 
 //maxheap function
-void maxheap( int n,int arr[], int i){
+void maxheap( int arr[],int n, int i){
     int largest = i; //taking as parent
     int left = 2 * i + 1; //taking as left child
     int right = 2 * i + 2; //taking as right child
@@ -29,7 +29,7 @@ void maxheap( int n,int arr[], int i){
 }
 void buildmaxheap(int arr[], int n){
     for (int i = n / 2 - 1; i >= 0; i--){ //to access the non leaf nodes
-        maxheap( n,arr, i);
+        maxheap(arr , n , largest);
     }
 }
 
@@ -49,7 +49,7 @@ void minheap(int arr[], int n, int i){
 
     if(smallest != i){
         swap(&arr[i], &arr[smallest]);
-        minHeap(arr, n, smallest);
+        minheap(arr, n, smallest);
     }
 }
 
